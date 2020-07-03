@@ -448,7 +448,7 @@ const Phonebook = () => {
           <Modal.Content>
             <p>This app was build using <b><a href='https://reactjs.org/'>React JS</a></b> + <b><a href='https://react.semantic-ui.com/'>Semantic UI</a></b> on frontend and <b><a href='https://www.djangoproject.com/'>Django</a></b> + <b><a href='https://www.django-rest-framework.org/'>Django REST Framework</a></b> as my API or backend.</p>
             <p>The app was hosted by <b><a href='www.heroku.com'>Heroku</a></b>.</p>
-            <p>The Database I used was <b><a href='https://www.postgresql.org/'>Postgres</a></b>.</p>
+            <p>The Database I used was <b><a href='https://www.sqlite.org/'>SQLite3</a></b>.</p>
           </Modal.Content>
           <Modal.Actions>
             <Button onClick={() => setInfoModal(false)}>
