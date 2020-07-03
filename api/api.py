@@ -8,7 +8,7 @@ from .serializers import PhonebookSerializer
 
 # Client Viewset  -  Allows to create full CRUD api without having to specify explicit method for the functionality
 class PhonebookViewSet(viewsets.ModelViewSet):
-    queryset = Phonebook.objects.exclude(IsDeleted=True).order_by("Name")
+    queryset = Phonebook.objects.all().order_by("Name")
     permission_classes = [
         permissions.AllowAny
     ]
