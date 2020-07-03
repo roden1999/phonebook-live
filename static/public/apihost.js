@@ -1,1 +1,0 @@
-var apihost = 'http://localhost:5050/';
