@@ -11,6 +11,7 @@ class Phonebook(models.Model):
     BirthDate = models.DateField(null=True, blank=True)
     Address = models.CharField(max_length=100, blank=True)
     Image = models.ImageField(default="default.jpg", null=True, blank=True, upload_to="")
+    IsDeleted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.Name
