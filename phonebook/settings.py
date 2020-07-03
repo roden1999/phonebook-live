@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '&^kz1344s_kmo5_guy%2!ia63e+#iyz*^4^k@oc34q4()^*o@s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['roden-covidproject-phonebook.herokuapp.com', '127.0.0.1']
 
