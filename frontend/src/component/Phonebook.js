@@ -74,6 +74,9 @@ const Phonebook = () => {
   const [errStatus, setErrStatus] = useState("");
   const [loading, setLoading] = useState(true);
   const [infoModal, setInfoModal] = useState(false);
+  const [addEditSuccess, setAddEditSuccess] = useState(false);
+  const [btnSaveLoading, setBtnSaveLoading] = useState(false);
+  const [btnDeleteLoading, setBtnDeleteLoading] = useState(false);
 
   useEffect(() => {
     var route = selectedContact !== null ? `api/phonebook/${selectedContact.value}/` : 'api/phonebook/';
@@ -111,6 +114,7 @@ const Phonebook = () => {
   })) : [];
 
   const onSave = (method) => {
+    setBtnSaveLoading(true);
     var route = method !== 'put' ? 'api/phonebook/' : `api/phonebook/${id}/`;
     var url = apihost + route;
     const data = new FormData();
@@ -142,6 +146,8 @@ const Phonebook = () => {
           setErrBirthDateMsg("");
           setErrAddressMsg("");
           setErrImageMsg("");
+          setAddEditSuccess(true);
+          setBtnSaveLoading(false);
         })
         .catch(err => {
           const errors = {
@@ -176,6 +182,8 @@ const Phonebook = () => {
           setErrBirthDateMsg("");
           setErrAddressMsg("");
           setErrImageMsg("");
+          setAddEditSuccess(true);
+          setBtnSaveLoading(false);
         })
         .catch(err => {
           const errors = {
@@ -195,6 +203,7 @@ const Phonebook = () => {
   }
 
   const onDelete = () => {
+    setBtnDeleteLoading(true);
     var url = apihost + `api/phonebook/${id}/`;
     axios
       .delete(url)
@@ -208,6 +217,7 @@ const Phonebook = () => {
         setEmail("");
         setBirthDate("");
         setImage(null);
+        setBtnDeleteLoading(false);
       })
       .catch(err => console.log(err.response.data))
   }
@@ -427,12 +437,12 @@ const Phonebook = () => {
             {id === -1 ?
               <Button
                 content='Save'
-                loading={btnLoading}
+                loading={btnSaveLoading}
                 onClick={() => onSave('post')}
               /> :
               <Button
                 content='Save'
-                loading={btnLoading}
+                loading={btnSaveLoading}
                 onClick={() => onSave('put')}
               />
             }
@@ -448,7 +458,7 @@ const Phonebook = () => {
           <Modal.Content>
             <p>This app was build using <b><a href='https://reactjs.org/'>React JS</a></b> + <b><a href='https://react.semantic-ui.com/'>Semantic UI</a></b> on frontend and <b><a href='https://www.djangoproject.com/'>Django</a></b> + <b><a href='https://www.django-rest-framework.org/'>Django REST Framework</a></b> as my API or backend.</p>
             <p>The app was hosted by <b><a href='www.heroku.com'>Heroku</a></b>.</p>
-            <p>The Database I used was <b><a href='https://www.sqlite.org/'>SQLite3</a></b>.</p>
+            <p>The Database I used was <b><a href='https://www.postgresql.org/'>Postgresql</a></b>.</p>
           </Modal.Content>
           <Modal.Actions>
             <Button onClick={() => setInfoModal(false)}>
@@ -467,7 +477,7 @@ const Phonebook = () => {
             <p>Are you sure you want to delete this Employee?</p>
           </Modal.Content>
           <Modal.Actions>
-            <Button onClick={onDelete}>
+            <Button loading={btnDeleteLoading} onClick={onDelete}>
               Okay
               </Button>
             <Button onClick={cancelDelModal}>
@@ -475,6 +485,23 @@ const Phonebook = () => {
               </Button>
           </Modal.Actions>
         </Modal>
+
+        <Portal open={addEditSuccess}>
+          <Segment
+            style={{
+              left: '40%',
+              position: 'fixed',
+              top: '35%',
+              zIndex: 1000,
+              backgroundColor: '#4bb543',
+              width: 350,
+            }}
+          >
+            <Header style={{ color: 'white' }}>Success</Header>
+            <p style={{ color: 'white' }}>Employee was successfully saved.</p>
+            <Button content='Okay' floated='right' onClick={() => setAddEditSuccess(false)} />
+          </Segment>
+        </Portal>
 
         <Portal open={delSuccess}>
           <Segment
@@ -488,7 +515,7 @@ const Phonebook = () => {
             }}
           >
             <Header style={{ color: 'white' }}>Success</Header>
-            <p style={{ color: 'white' }}>Employee was successfully delete.d</p>
+            <p style={{ color: 'white' }}>Employee was successfully deleted.</p>
             <Button content='Okay' floated='right' onClick={() => setDelSuccess(false)} />
           </Segment>
         </Portal>
