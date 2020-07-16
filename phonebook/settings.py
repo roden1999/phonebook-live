@@ -89,7 +89,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse('postgres://xzmkhvseihockj:9ff7ae2a5102917941b8534e64e02466b40ffd279f5aa9fb164325f03ed5bc3a@ec2-50-17-90-177.compute-1.amazonaws.com:5432/d8fs8ee7ckjaia', conn_max_age=600)
+DATABASES['default'] = dj_database_url.parse('postgres://kesrdzilfnicix:996407e8b7cbf9651dd5f4337897201bb6a2fb03317ed476df2be43486021fe6@ec2-23-20-168-40.compute-1.amazonaws.com:5432/d1na1h7mc3grlb', conn_max_age=600)
 
 
 # Password validation
